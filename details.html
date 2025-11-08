@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>كاوبوي بيبوب - الحلقات</title>
+  <style>
+    body {
+      font-family: "Tahoma", "Arial", sans-serif;
+      background-color: #0b0c10;
+      color: #c5c6c7;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      transition: background-color 0.4s, color 0.4s;
+    }
+
+    /* الوضع الليلي والفاتح */
+    body.light {
+      background-color: #f5f5f5;
+      color: #222;
+    }
+
+    /* شريط التنقل */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1f2833;
+      color: #fff;
+      padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    nav h1 {
+      margin: 0;
+      font-size: 20px;
+      color: #66fcf1;
+      letter-spacing: 1px;
+    }
+
+    .mode-toggle {
+      background: none;
+      border: none;
+      color: #66fcf1;
+      font-size: 22px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .mode-toggle:hover {
+      transform: rotate(20deg);
+    }
+
+    header {
+      background-color: #1f2833;
+      text-align: center;
+      padding: 80px 20px 20px; /* مساحة إضافية لأن الشريط ثابت */
+      margin-bottom: 20px;
+    }
+
+    header h2 {
+      margin: 0;
+      color: #66fcf1;
+      font-size: 26px;
+    }
+
+    .anime-info {
+      margin-top: 5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .anime-info img {
+      max-width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #45a29e;
+    }
+
+    .details {
+      max-width: 600px;
+    }
+
+    .details h3 {
+      color: #66fcf1;
+    }
+
+    .trailer {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    iframe {
+      width: 80%;
+      max-width: 720px;
+      height: 405px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #45a29e;
+    }
+
+    .episodes {
+      margin: 40px auto;
+      max-width: 900px;
+      background-color: #1f2833;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px #45a29e;
+    }
+
+    .episodes h2 {
+      color: #66fcf1;
+      text-align: center;
+    }
+
+    .episode {
+      border-bottom: 1px solid #45a29e;
+      padding: 10px 0;
+    }
+
+    .episode:last-child {
+      border-bottom: none;
+    }
+
+    .episode a {
+      color: #66fcf1;
+      text-decoration: none;
+    }
+
+    .episode a:hover {
+      text-decoration: underline;
+    }
+
+    .score {
+      color: #ffd700;
+    }
+
+    /* وضع فاتح لعناصر الصفحة */
+    body.light nav {
+      background-color: #ffffff;
+      color: #222;
+    }
+
+    body.light nav h1 {
+      color: #00796b;
+    }
+
+    body.light .episodes {
+      background-color: #e0f2f1;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    body.light .anime-info img {
+      box-shadow: 0 0 10px #90caf9;
+    }
+
+    body.light .details h3 {
+      color: #00796b;
+    }
+
+    body.light .episode a {
+      color: #00695c;
+    }
+  </style>
+
+  <link rel="stylesheet" href="./styles/style.css">
+
+</head>
+<body>
+  <!-- الشريط العلوي -->
+<nav>
+  <h1>🎬 أنمي توك</h1>
+  <div>
+    <a href="index.html"> الرئيسية</a>
+    <a href="video.html"> الحلقات</a>
+    <a href="faq.html"> الأسئلة الشائعة</a>
+    <button id="modeBtn" class="mode-toggle">🌙</button>
+  </div>
+</nav>
+
+  <div class="anime-info" id="anime-info"></div>
+
+  <div class="trailer" id="trailer"></div>
+
+  <section class="episodes">
+    <h2>قائمة الحلقات</h2>
+    <div id="episodes-list"></div>
+  </section>
+
+  <script>
+    const animeUrl = "https://api.jikan.moe/v4/anime/28/full";
+    const episodesUrl = "https://api.jikan.moe/v4/anime/28/episodes";
+
+    // تحميل بيانات الأنمي
+    async function loadAnimeInfo() {
+      const res = await fetch(animeUrl);
+      const { data } = await res.json();
+
+      const infoContainer = document.getElementById("anime-info");
+      infoContainer.innerHTML = `
+        <img src="${data.images.jpg.image_url}" alt="${data.title}" />
+        <div class="details">
+          <h3>${data.title} (${data.year})</h3>
+          <p><strong>النوع:</strong> ${data.type}</p>
+          <p><strong>عدد الحلقات:</strong> ${data.episodes}</p>
+          <p><strong>التقييم:</strong> ⭐ ${data.score}</p>
+          <p><strong>الترتيب:</strong> #${data.rank}</p>
+          <p><strong>الملخص:</strong><br>${data.synopsis}</p>
+        </div>
+      `;
+
+      // المقطع الدعائي
+      const trailerDiv = document.getElementById("trailer");
+      if (data.trailer && data.trailer.embed_url) {
+        trailerDiv.innerHTML = `
+          <h2>العرض الرسمي</h2>
+          <iframe src="${data.trailer.embed_url}" allowfullscreen></iframe>
+        `;
+      } else {
+        trailerDiv.innerHTML = "<p>لا يوجد عرض دعائي متاح حالياً.</p>";
+      }
+    }
+
+    // تحميل الحلقات
+    async function loadEpisodes() {
+      const res = await fetch(episodesUrl);
+      const { data } = await res.json();
+
+      const list = document.getElementById("episodes-list");
+      list.innerHTML = data.map(ep => `
+        <div class="episode">
+          <h3><a href="${ep.url}" target="_blank">الحلقة ${ep.mal_id}: ${ep.title}</a></h3>
+          <p><strong>باليابانية:</strong> ${ep.title_japanese}</p>
+          <p><strong>منطوق:</strong> ${ep.title_romanji || ep.title_romanized || "غير متوفر"}</p>
+          <p><strong>تاريخ العرض:</strong> ${ep.aired ? new Date(ep.aired).toLocaleDateString('ar-EG') : "غير معروف"}</p>
+          <p class="score"><strong>التقييم:</strong> ${ep.score || "غير متوفر"}</p>
+        </div>
+      `).join("");
+    }
+
+    // زر الوضع الليلي / الفاتح
+    const modeBtn = document.getElementById("modeBtn");
+    modeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      modeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
+    });
+
+    // تشغيل الوظائف
+    loadAnimeInfo();
+    loadEpisodes();
+  </script>
+</body>
+</html>

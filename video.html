@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مشاهدة الحلقة - أنمي توك</title>
+  <style>
+    body {
+      font-family: "Cairo", Arial, sans-serif;
+      background-color: #0b0c10;
+      color: #c5c6c7;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1f2833;
+      color: #fff;
+      padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    nav h1 {
+      margin: 0;
+      color: #66fcf1;
+      font-size: 22px;
+    }
+
+    .mode-toggle {
+      background: none;
+      border: none;
+      color: #66fcf1;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    header {
+      padding: 90px 20px 20px;
+      text-align: center;
+      color: #66fcf1;
+    }
+
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 20px auto;
+      max-width: 960px;
+      background-color: #1f2833;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px #45a29e;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 10px;
+      background: #000;
+      outline: none;
+    }
+
+    .controls {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .next-btn {
+      background-color: #45a29e;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .next-btn:hover {
+      background-color: #66fcf1;
+      color: #0b0c10;
+    }
+
+    /* الأنميات المقترحة */
+    .recommendations {
+      margin: 40px auto;
+      max-width: 1100px;
+      padding: 20px;
+    }
+
+    .recommendations h2 {
+      text-align: center;
+      color: #66fcf1;
+      margin-bottom: 20px;
+    }
+
+    .anime-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .anime-card {
+      background-color: #1f2833;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #45a29e;
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .anime-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .anime-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .anime-card h3 {
+      font-size: 16px;
+      padding: 10px;
+      color: #66fcf1;
+    }
+
+    footer {
+      text-align: center;
+      color: #999;
+      margin: 30px 0 15px;
+      font-size: 14px;
+    }
+
+    /* الوضع الفاتح */
+    body.light {
+      background-color: #fafafa;
+      color: #222;
+    }
+
+    body.light nav {
+      background-color: #fff;
+      color: #222;
+    }
+
+    body.light .video-container,
+    body.light .anime-card {
+      background-color: #fff;
+      box-shadow: 0 0 10px #aaa;
+    }
+
+    body.light .anime-card h3 {
+      color: #00796b;
+    }
+  </style>
+
+  <link rel="stylesheet" href="./styles/style.css">
+
+
+
+</head>
+<body>
+   <!-- الشريط العلوي -->
+<nav>
+  <h1>🎬 أنمي توك</h1>
+  <div>
+    <a href="index.html"> الرئيسية</a>
+    <a href="video.html"> الحلقات</a>
+    <a href="faq.html"> الأسئلة الشائعة</a>
+    <button id="modeBtn" class="mode-toggle">🌙</button>
+  </div>
+</nav>
+
+  <header>
+    <h2 id="anime-title">مشاهدة الحلقة</h2>
+  </header>
+
+  <div class="video-container">
+    <video id="animeVideo" controls>
+      <!-- يمكنك استبدال الفيديو أدناه بفيديو فعلي -->
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+
+    <div class="controls">
+      <button class="next-btn" id="nextEpisode">⏭️ الحلقة التالية</button>
+    </div>
+  </div>
+
+  <section class="recommendations">
+    <h2>أنميات مقترَحة وشائعة 🔥</h2>
+    <div id="recommendationsList" class="anime-grid"></div>
+  </section>
+
+  <footer>
+    © 2025 أنمي توك | لعشّاق الأنمي في كل مكان 🌸
+  </footer>
+
+  <script>
+    // زر الوضع الليلي / الفاتح
+    const modeBtn = document.getElementById("modeBtn");
+    modeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      modeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
+    });
+
+    // زر الحلقة التالية
+    document.getElementById("nextEpisode").addEventListener("click", () => {
+      alert("جاري الانتقال إلى الحلقة التالية 🎬");
+      // هنا يمكنك برمجة الانتقال إلى رابط الحلقة التالية فعلياً
+      // مثال: window.location.href = "video2.html";
+    });
+
+    // جلب الأنميات المقترحة
+    async function loadRecommendations() {
+      const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=10");
+      const { data } = await res.json();
+
+      const container = document.getElementById("recommendationsList");
+      container.innerHTML = data.map(anime => `
+        <div class="anime-card">
+          <a href="https://myanimelist.net/anime/${anime.mal_id}" target="_blank">
+            <img src="${anime.images.jpg.large_image_url}" alt="${anime.title}">
+            <h3>${anime.title}</h3>
+          </a>
+        </div>
+      `).join("");
+    }
+
+    loadRecommendations();
+  </script>
+</body>
+</html>
