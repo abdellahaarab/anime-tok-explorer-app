@@ -5,7 +5,6 @@
 A modern **Anime Explorer Web App** built with **HTML**, **CSS**, and **Vanilla JavaScript** — powered by the **Jikan API** (unofficial MyAnimeList API).  
 Browse, search, and explore anime effortlessly with a clean, responsive, and bilingual interface (Arabic & English).
 
-🎥 YouTube: [@dkn4.hackers](https://www.youtube.com/@dkn4.hackers)
 
 ----------
 
@@ -41,10 +40,6 @@ anime-tok-explorer-app/
 ## 🖼️ Preview
 
 ![IMAGE](https://raw.githubusercontent.com/abdellahaarab/anime-tok-explorer-app/refs/heads/main/images/1262882.jpg)
-
-Light Mode
-
-Dark Mode
 
 
 ----------
@@ -215,4 +210,4 @@ Feel free to use, modify, or improve it with proper credit.
 🎥 YouTube: [@dkn4.hackers](https://www.youtube.com/@dkn4.hackers)  
 💡 Developer | Content Creator | Tech Enthusiast
 
-----------
+
