@@ -2,261 +2,293 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>كاوبوي بيبوب - الحلقات</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نمي توك - الحلقات</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: "Tahoma", "Arial", sans-serif;
-      background-color: #0b0c10;
-      color: #c5c6c7;
       margin: 0;
-      padding: 0;
-      direction: rtl;
-      transition: background-color 0.4s, color 0.4s;
+      font-family: "Cairo", sans-serif;
+      background: #0b0c10;
+      color: #c5c6c7;
+      transition: 0.3s;
     }
 
-    /* الوضع الليلي والفاتح */
     body.light {
-      background-color: #f5f5f5;
+      background: #f4f6f9;
       color: #222;
     }
 
-    /* شريط التنقل */
+    /* NAV */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #1f2833;
-      color: #fff;
-      padding: 10px 20px;
+      padding: 15px 25px;
+      background: rgba(20,20,30,0.85);
+      backdrop-filter: blur(10px);
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      z-index: 1000;
     }
 
     nav h1 {
       margin: 0;
-      font-size: 20px;
       color: #66fcf1;
-      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: #ccc;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #fff;
     }
 
     .mode-toggle {
       background: none;
       border: none;
       color: #66fcf1;
-      font-size: 22px;
+      font-size: 20px;
       cursor: pointer;
-      transition: transform 0.3s;
     }
 
-    .mode-toggle:hover {
-      transform: rotate(20deg);
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 60vh;
+      overflow: hidden;
     }
 
-    header {
-      background-color: #1f2833;
-      text-align: center;
-      padding: 80px 20px 20px; /* مساحة إضافية لأن الشريط ثابت */
-      margin-bottom: 20px;
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    header h2 {
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9));
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      color: white;
+      z-index: 2;
+    }
+
+    .hero-content h2 {
       margin: 0;
-      color: #66fcf1;
-      font-size: 26px;
+      font-size: 36px;
     }
 
+    /* ANIME INFO */
     .anime-info {
-      margin-top: 5rem;
+      max-width: 1100px;
+      margin: 40px auto;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
+      gap: 25px;
       padding: 20px;
-      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .anime-info img {
-      max-width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #45a29e;
+      width: 260px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 
     .details {
-      max-width: 600px;
+      flex: 1;
     }
 
     .details h3 {
       color: #66fcf1;
+      margin-top: 0;
     }
 
+    .details p {
+      line-height: 1.7;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      margin: 5px;
+      background: #45a29e;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #0b0c10;
+    }
+
+    /* TRAILER */
     .trailer {
       text-align: center;
-      margin: 30px 0;
+      margin: 40px 0;
     }
 
     iframe {
-      width: 80%;
-      max-width: 720px;
-      height: 405px;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #45a29e;
+      width: 90%;
+      max-width: 800px;
+      height: 450px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
+    /* EPISODES */
     .episodes {
+      max-width: 1000px;
       margin: 40px auto;
-      max-width: 900px;
-      background-color: #1f2833;
-      border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 0 10px #45a29e;
     }
 
     .episodes h2 {
-      color: #66fcf1;
       text-align: center;
+      color: #66fcf1;
+      margin-bottom: 20px;
     }
 
     .episode {
-      border-bottom: 1px solid #45a29e;
-      padding: 10px 0;
+      background: #1f2833;
+      padding: 15px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      transition: 0.3s;
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
-    .episode:last-child {
-      border-bottom: none;
+    .episode:hover {
+      transform: translateY(-4px);
+      background: #253140;
     }
 
     .episode a {
       color: #66fcf1;
       text-decoration: none;
+      font-weight: bold;
     }
 
-    .episode a:hover {
-      text-decoration: underline;
+    .episode p {
+      margin: 5px 0;
+      font-size: 14px;
     }
 
     .score {
-      color: #ffd700;
+      color: gold;
     }
 
-    /* وضع فاتح لعناصر الصفحة */
+    /* LIGHT MODE */
     body.light nav {
-      background-color: #ffffff;
-      color: #222;
+      background: #fff;
     }
 
-    body.light nav h1 {
+    body.light .episode {
+      background: #fff;
+    }
+
+    body.light .episode a {
       color: #00796b;
-    }
-
-    body.light .episodes {
-      background-color: #e0f2f1;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-    }
-
-    body.light .anime-info img {
-      box-shadow: 0 0 10px #90caf9;
     }
 
     body.light .details h3 {
       color: #00796b;
     }
-
-    body.light .episode a {
-      color: #00695c;
-    }
   </style>
-
-  <link rel="stylesheet" href="./styles/style.css">
-
 </head>
+
 <body>
-  <!-- الشريط العلوي -->
+
+<!-- NAV -->
 <nav>
   <h1>🎬 أنمي توك</h1>
   <div>
-    <a href="index.html"> الرئيسية</a>
-    <a href="video.html"> الحلقات</a>
-    <a href="faq.html"> الأسئلة الشائعة</a>
+    <a href="index.html">الرئيسية</a>
+    <a href="video.html">الحلقات</a>
+    <a href="faq.html">الأسئلة الشائعة</a>
     <button id="modeBtn" class="mode-toggle">🌙</button>
   </div>
 </nav>
 
-  <div class="anime-info" id="anime-info"></div>
+<!-- HERO -->
+<section class="hero">
+  <img src="https://cdn.myanimelist.net/images/anime/4/19644.jpg">
+  <div class="hero-content">
+    <h2 id="hero-title">كاوبوي بيبوب</h2>
+  </div>
+</section>
 
-  <div class="trailer" id="trailer"></div>
+<div class="anime-info" id="anime-info"></div>
 
-  <section class="episodes">
-    <h2>قائمة الحلقات</h2>
-    <div id="episodes-list"></div>
-  </section>
+<div class="trailer" id="trailer"></div>
 
-  <script>
-    const animeUrl = "https://api.jikan.moe/v4/anime/28/full";
-    const episodesUrl = "https://api.jikan.moe/v4/anime/28/episodes";
+<section class="episodes">
+  <h2>قائمة الحلقات</h2>
+  <div id="episodes-list"></div>
+</section>
 
-    // تحميل بيانات الأنمي
-    async function loadAnimeInfo() {
-      const res = await fetch(animeUrl);
-      const { data } = await res.json();
+<script>
+const animeUrl = "https://api.jikan.moe/v4/anime/28/full";
+const episodesUrl = "https://api.jikan.moe/v4/anime/28/episodes";
 
-      const infoContainer = document.getElementById("anime-info");
-      infoContainer.innerHTML = `
-        <img src="${data.images.jpg.image_url}" alt="${data.title}" />
-        <div class="details">
-          <h3>${data.title} (${data.year})</h3>
-          <p><strong>النوع:</strong> ${data.type}</p>
-          <p><strong>عدد الحلقات:</strong> ${data.episodes}</p>
-          <p><strong>التقييم:</strong> ⭐ ${data.score}</p>
-          <p><strong>الترتيب:</strong> #${data.rank}</p>
-          <p><strong>الملخص:</strong><br>${data.synopsis}</p>
-        </div>
-      `;
+async function loadAnimeInfo() {
+  const res = await fetch(animeUrl);
+  const { data } = await res.json();
 
-      // المقطع الدعائي
-      const trailerDiv = document.getElementById("trailer");
-      if (data.trailer && data.trailer.embed_url) {
-        trailerDiv.innerHTML = `
-          <h2>العرض الرسمي</h2>
-          <iframe src="${data.trailer.embed_url}" allowfullscreen></iframe>
-        `;
-      } else {
-        trailerDiv.innerHTML = "<p>لا يوجد عرض دعائي متاح حالياً.</p>";
-      }
-    }
+  document.getElementById("hero-title").textContent = data.title;
 
-    // تحميل الحلقات
-    async function loadEpisodes() {
-      const res = await fetch(episodesUrl);
-      const { data } = await res.json();
+  document.getElementById("anime-info").innerHTML = `
+    <img src="${data.images.jpg.image_url}">
+    <div class="details">
+      <h3>${data.title} (${data.year})</h3>
+      <p>
+        <span class="tag">${data.type}</span>
+        <span class="tag">${data.status}</span>
+        <span class="tag">${data.episodes} حلقة</span>
+      </p>
+      <p>⭐ ${data.score} | الترتيب #${data.rank}</p>
+      <p>${data.synopsis}</p>
+    </div>
+  `;
 
-      const list = document.getElementById("episodes-list");
-      list.innerHTML = data.map(ep => `
-        <div class="episode">
-          <h3><a href="${ep.url}" target="_blank">الحلقة ${ep.mal_id}: ${ep.title}</a></h3>
-          <p><strong>باليابانية:</strong> ${ep.title_japanese}</p>
-          <p><strong>منطوق:</strong> ${ep.title_romanji || ep.title_romanized || "غير متوفر"}</p>
-          <p><strong>تاريخ العرض:</strong> ${ep.aired ? new Date(ep.aired).toLocaleDateString('ar-EG') : "غير معروف"}</p>
-          <p class="score"><strong>التقييم:</strong> ${ep.score || "غير متوفر"}</p>
-        </div>
-      `).join("");
-    }
+  const trailerDiv = document.getElementById("trailer");
+  trailerDiv.innerHTML = data.trailer?.embed_url
+    ? `<iframe src="${data.trailer.embed_url}" allowfullscreen></iframe>`
+    : `<p>لا يوجد عرض دعائي</p>`;
+}
 
-    // زر الوضع الليلي / الفاتح
-    const modeBtn = document.getElementById("modeBtn");
-    modeBtn.addEventListener("click", () => {
-      document.body.classList.toggle("light");
-      modeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
-    });
+async function loadEpisodes() {
+  const res = await fetch(episodesUrl);
+  const { data } = await res.json();
 
-    // تشغيل الوظائف
-    loadAnimeInfo();
-    loadEpisodes();
-  </script>
+  document.getElementById("episodes-list").innerHTML =
+    data.map(ep => `
+      <div class="episode">
+        <a href="${ep.url}" target="_blank">
+          الحلقة ${ep.mal_id}: ${ep.title}
+        </a>
+        <p>${ep.title_japanese || ""}</p>
+        <p>${ep.aired ? new Date(ep.aired).toLocaleDateString('ar-EG') : ""}</p>
+        <p class="score">⭐ ${ep.score || "-"}</p>
+      </div>
+    `).join("");
+}
+
+document.getElementById("modeBtn").onclick = () => {
+  document.body.classList.toggle("light");
+};
+
+loadAnimeInfo();
+loadEpisodes();
+</script>
+
 </body>
 </html>
