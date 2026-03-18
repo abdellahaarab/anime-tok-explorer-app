@@ -2,31 +2,36 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>الأسئلة الشائعة - أنمي توك</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: "Cairo", Arial, sans-serif;
-      background-color: #0b0c10;
-      color: #c5c6c7;
       margin: 0;
-      padding: 0;
-      transition: background-color 0.3s, color 0.3s;
+      font-family: "Cairo", sans-serif;
+      background: #0b0c10;
+      color: #c5c6c7;
+      transition: 0.3s;
     }
 
+    body.light {
+      background: #f4f6f9;
+      color: #222;
+    }
+
+    /* NAVBAR */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #1f2833;
-      color: #fff;
-      padding: 10px 20px;
+      padding: 15px 25px;
+      background: rgba(20,20,30,0.85);
+      backdrop-filter: blur(10px);
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      z-index: 1000;
     }
 
     nav h1 {
@@ -35,54 +40,91 @@
       font-size: 22px;
     }
 
+    nav a {
+      color: #ccc;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
     .mode-toggle {
       background: none;
       border: none;
       color: #66fcf1;
-      font-size: 22px;
+      font-size: 20px;
       cursor: pointer;
-      transition: transform 0.3s;
     }
 
-    .mode-toggle:hover {
-      transform: rotate(20deg);
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 60vh;
+      overflow: hidden;
     }
 
-    header {
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9));
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
-      padding: 100px 20px 40px;
-      background: url('./images/1262882.jpg') center/cover no-repeat;
-      color: #fff;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+      color: white;
+      z-index: 2;
     }
 
-    header h2 {
-      font-size: 34px;
-      margin: 0;
+    .hero-content h2 {
+      font-size: 40px;
+      margin-bottom: 10px;
     }
 
-    header p {
-      font-size: 18px;
+    .hero-content p {
+      color: #ddd;
     }
 
-    /* قسم الأسئلة */
-    .faq-section {
-      max-width: 850px;
-      margin: 40px auto;
-      background-color: #1f2833;
-      border-radius: 10px;
-      padding: 25px 30px;
-      box-shadow: 0 0 10px #45a29e;
+    /* FAQ */
+    .faq-container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 20px;
     }
 
-    .faq-section h2 {
+    .faq-box {
+      background: #1f2833;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    body.light .faq-box {
+      background: #fff;
+    }
+
+    .faq-title {
+      text-align: center;
+      font-size: 26px;
       color: #66fcf1;
-      text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .faq-item {
-      border-bottom: 1px solid #45a29e;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
       padding: 15px 0;
     }
 
@@ -92,167 +134,133 @@
 
     .faq-question {
       cursor: pointer;
-      font-weight: bold;
-      color: #66fcf1;
+      font-weight: 600;
       position: relative;
-      padding-left: 25px;
+      padding-right: 30px;
+      transition: 0.3s;
     }
 
-    .faq-question::before {
-      content: "＋";
-      position: absolute;
-      left: 0;
+    .faq-question:hover {
       color: #66fcf1;
-      font-weight: bold;
-      transition: transform 0.3s;
     }
 
-    .faq-item.active .faq-question::before {
-      content: "－";
+    .faq-question::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      font-size: 20px;
+      transition: 0.3s;
+    }
+
+    .faq-item.active .faq-question::after {
+      content: "-";
     }
 
     .faq-answer {
-      display: none;
-      padding-top: 10px;
-      color: #c5c6c7;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
       line-height: 1.8;
+      color: #aaa;
     }
 
     .faq-item.active .faq-answer {
-      display: block;
-      animation: fadeIn 0.4s;
+      max-height: 300px;
+      margin-top: 10px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
+    body.light .faq-answer {
+      color: #555;
     }
 
+    /* FOOTER */
     footer {
       text-align: center;
-      color: #999;
       margin: 40px 0 20px;
+      color: #888;
       font-size: 14px;
     }
 
-    /* الوضع الفاتح */
-    body.light {
-      background-color: #fafafa;
-      color: #222;
-    }
-
-    body.light nav {
-      background-color: #fff;
-      color: #222;
-    }
-
-    body.light .faq-section {
-      background-color: #fff;
-      box-shadow: 0 0 10px #aaa;
-    }
-
-    body.light .faq-question {
-      color: #00796b;
+    body.light footer {
+      color: #666;
     }
   </style>
-
-  <link rel="stylesheet" href="./styles/style.css">
-
 </head>
+
 <body>
-  <!-- الشريط العلوي -->
+
+<!-- NAV -->
 <nav>
   <h1>🎬 أنمي توك</h1>
   <div>
-    <a href="index.html"> الرئيسية</a>
-    <a href="video.html"> الحلقات</a>
-    <a href="faq.html"> الأسئلة الشائعة</a>
+    <a href="index.html">الرئيسية</a>
+    <a href="video.html">الحلقات</a>
+    <a href="faq.html">الأسئلة الشائعة</a>
     <button id="modeBtn" class="mode-toggle">🌙</button>
   </div>
 </nav>
 
-  <header>
+<!-- HERO -->
+<section class="hero">
+  <img src="https://raw.githubusercontent.com/abdellahaarab/anime-tok-explorer-app/refs/heads/main/images/1262882.jpg">
+  <div class="hero-content">
     <h2>الأسئلة الشائعة</h2>
-    <p>كل ما تحتاج معرفته عن مشاهدة الأنمي عبر الإنترنت</p>
-  </header>
+    <p>كل ما تحتاج معرفته عن منصة أنمي توك</p>
+  </div>
+</section>
 
-  <section class="faq-section">
-    <h2>الأسئلة الأكثر شيوعاً</h2>
+<!-- FAQ -->
+<div class="faq-container">
+  <div class="faq-box">
+
+    <div class="faq-title">الأسئلة الأكثر شيوعاً</div>
 
     <div class="faq-item">
-      <div class="faq-question">هل يمكنني تحميل حلقات الأنمي من 🎬 أنمي توك؟</div>
-      <div class="faq-answer">
-        نعم، يمكنك تحميل الحلقات إذا كنت مشتركاً في باقة <strong>Premium</strong>.  
-        يتيح لك التطبيق تنزيل الأنمي ومشاهدته لاحقاً دون اتصال بالإنترنت على أجهزة Android و iOS.
-      </div>
+      <div class="faq-question">هل يمكنني تحميل حلقات الأنمي؟</div>
+      <div class="faq-answer">نعم، يمكنك تحميل الحلقات في الباقة المدفوعة ومشاهدتها بدون إنترنت.</div>
     </div>
 
     <div class="faq-item">
-      <div class="faq-question">كيف يمكنني تفعيل حساب 🎬 أنمي توك على جهازي؟</div>
-      <div class="faq-answer">
-        العملية بسيطة جداً! افتح تطبيق 🎬 أنمي توك على جهازك، واختر <strong>"تفعيل باستخدام رمز"</strong>.  
-        سيظهر رمز مكوّن من ستة أحرف على الشاشة.  
-        انتقل إلى <a href="" target="_blank" style="color:#66fcf1;">https://www.test.com/activate</a>  
-        عبر متصفحك، أدخل الرمز، وستكون جاهزاً لمتابعة أنميك المفضل فوراً 🎉.
-      </div>
+      <div class="faq-question">كيف أفعل الحساب؟</div>
+      <div class="faq-answer">قم بإدخال رمز التفعيل عبر الموقع ثم استمتع بالمشاهدة.</div>
     </div>
 
     <div class="faq-item">
-      <div class="faq-question">هل أحتاج إلى اشتراك مدفوع لمشاهدة الأنمي؟</div>
-      <div class="faq-answer">
-        يمكنك مشاهدة بعض الأنميات مجاناً مع إعلانات،  
-        ولكن للحصول على تجربة بدون إعلانات وبجودة عالية HD، يُفضّل الاشتراك في الخطة المدفوعة.
-      </div>
+      <div class="faq-question">هل يوجد اشتراك مجاني؟</div>
+      <div class="faq-answer">نعم، يمكنك مشاهدة بعض الأنميات مجاناً مع إعلانات.</div>
     </div>
 
     <div class="faq-item">
-      <div class="faq-question">ما هي أفضل الأجهزة لمشاهدة 🎬 أنمي توك؟</div>
-      <div class="faq-answer">
-        يمكنك تشغيل 🎬 أنمي توك على أجهزة عديدة مثل:
-        <ul>
-          <li>الهواتف الذكية (Android / iOS)</li>
-          <li>التلفزيونات الذكية (Smart TV)</li>
-          <li>أجهزة PlayStation و Xbox</li>
-          <li>أجهزة الكمبيوتر والمتصفحات</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">هل يمكنني تفعيل الترجمة العربية؟</div>
-      <div class="faq-answer">
-        نعم بالتأكيد، معظم الأنميات على 🎬 أنمي توك تدعم الترجمة العربية.  
-        فقط انتقل إلى إعدادات المشاهدة داخل الفيديو واختر اللغة العربية من قائمة الترجمات 🌐.
-      </div>
+      <div class="faq-question">هل توجد ترجمة عربية؟</div>
+      <div class="faq-answer">نعم، معظم الأنميات تدعم الترجمة العربية.</div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question">هل تواجه مشكلة؟</div>
       <div class="faq-answer">
-        قم بزيارة <a href="https://help.lr.com/" target="_blank" style="color:#66fcf1;">مركز المساعدة الرسمي</a> للحصول على الدعم.  
-        كما يمكنك التواصل مع فريق <strong>أنمي توك</strong> للمزيد من الإرشادات والمقالات المفيدة حول عالم الأنمي 💫.
+        تفضل بزيارة
+        <a href="https://help.lr.com/" target="_blank" style="color:#66fcf1;">مركز المساعدة</a>
       </div>
     </div>
-  </section>
 
-  <footer>
-    © 2025 أنمي توك | تم التصميم بحب لعشّاق الأنمي 💖
-  </footer>
+  </div>
+</div>
 
-  <script>
-    // تفعيل / إخفاء الإجابات
-    document.querySelectorAll('.faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        q.parentElement.classList.toggle('active');
-      });
-    });
+<footer>
+  © 2026 أنمي توك
+</footer>
 
-    // الوضع الليلي / الفاتح
-    const modeBtn = document.getElementById("modeBtn");
-    modeBtn.addEventListener("click", () => {
-      document.body.classList.toggle("light");
-      modeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
-    });
-  </script>
+<script>
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    q.parentElement.classList.toggle('active');
+  });
+});
+
+document.getElementById("modeBtn").onclick = () => {
+  document.body.classList.toggle("light");
+};
+</script>
+
 </body>
 </html>
