@@ -8,6 +8,7 @@
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/footer.css">
+  <link rel="stylesheet" href="styles/navbar.css">
   <style>
     body {
       margin: 0;
@@ -22,35 +23,7 @@
       color: #eee;
     }
 
-    /* NAVBAR */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 25px;
-      background: rgba(20,20,30,0.85);
-      backdrop-filter: blur(10px);
-      color: white;
-      position: fixed;
-      width: 100%;
-      z-index: 1000;
-    }
-
-    nav h1 {
-      margin: 0;
-      font-size: 22px;
-    }
-
-    nav a {
-      color: #ddd;
-      margin: 0 10px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #fff;
-    }
+    
 
     .mode-toggle {
       background: none;
@@ -191,16 +164,19 @@
 
 <body>
 
-<!-- NAV -->
-<nav>
-  <h1>🎬 أنمي توك</h1>
-  <div>
-    <a href="index.html">الرئيسية</a>
-    <a href="video.html">الحلقات</a>
-    <a href="faq.html">الأسئلة</a>
-    <button id="modeBtn" class="mode-toggle">🌙</button>
-  </div>
-</nav>
+
+<!-- navbar-placeholder -->
+<div id="navbar-placeholder"></div>
+
+<script>
+fetch("component/navbar.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("navbar-placeholder").innerHTML = data;
+  });
+</script>
+<!-- navbar-placeholder -->
+
 
 <!-- HERO (الصورة داخل HTML) -->
 <section class="hero">
