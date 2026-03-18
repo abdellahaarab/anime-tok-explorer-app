@@ -7,6 +7,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/footer.css">
+  
   <style>
     body {
       margin: 0;
@@ -179,16 +180,17 @@
 
 <body>
 
-<!-- NAV -->
-<nav>
-  <h1>🎬 أنمي توك</h1>
-  <div>
-    <a href="index.html">الرئيسية</a>
-    <a href="video.html">الحلقات</a>
-    <a href="faq.html">الأسئلة الشائعة</a>
-    <button id="modeBtn" class="mode-toggle">🌙</button>
-  </div>
-</nav>
+<!-- navbar-placeholder -->
+<div id="navbar-placeholder"></div>
+
+<script>
+fetch("component/navbar.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("navbar-placeholder").innerHTML = data;
+  });
+</script>
+<!-- navbar-placeholder -->
 
 <!-- HEADER -->
 <header>
