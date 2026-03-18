@@ -203,6 +203,7 @@
       color: #00796b;
     }
   </style>
+  <link rel="stylesheet" href="styles/footer.css">
 </head>
 
 <body>
@@ -234,6 +235,19 @@
   <h2>قائمة الحلقات</h2>
   <div id="episodes-list"></div>
 </section>
+  
+<!-- footer-placeholder -->
+<div id="footer-placeholder"></div>
+
+<script>
+fetch("component/footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer-placeholder").innerHTML = data;
+  });
+</script>
+
+<!-- footer-placeholder -->
 
 <script>
 const animeUrl = "https://api.jikan.moe/v4/anime/28/full";
