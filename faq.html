@@ -6,7 +6,7 @@
   <title>الأسئلة الشائعة - أنمي توك</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="styles/footer.css">
   <style>
     body {
       margin: 0;
@@ -246,9 +246,18 @@
   </div>
 </div>
 
-<footer>
-  © 2025 أنمي توك
-</footer>
+<!-- footer-placeholder -->
+<div id="footer-placeholder"></div>
+
+<script>
+fetch("component/footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer-placeholder").innerHTML = data;
+  });
+</script>
+
+<!-- footer-placeholder -->
 
 <script>
 document.querySelectorAll('.faq-question').forEach(q => {
