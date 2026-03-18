@@ -6,7 +6,7 @@
   <title>مشاهدة الحلقة - أنمي توك</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="styles/footer.css">
   <style>
     body {
       margin: 0;
@@ -213,9 +213,18 @@
   <div id="recommendationsList" class="anime-grid"></div>
 </section>
 
-<footer>
-  © 2025 أنمي توك | لعشّاق الأنمي في كل مكان 🌸
-</footer>
+<!-- footer-placeholder -->
+<div id="footer-placeholder"></div>
+
+<script>
+fetch("component/footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer-placeholder").innerHTML = data;
+  });
+</script>
+
+<!-- footer-placeholder -->
 
 <script>
 document.getElementById("modeBtn").onclick = () => {
