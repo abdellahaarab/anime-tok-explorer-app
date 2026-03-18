@@ -7,7 +7,7 @@
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="styles/footer.css">
   <style>
     body {
       margin: 0;
@@ -225,7 +225,18 @@
     <button id="next-page">➡</button>
   </div>
 </main>
+<!-- footer-placeholder -->
+<div id="footer-placeholder"></div>
 
+<script>
+fetch("component/footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer-placeholder").innerHTML = data;
+  });
+</script>
+
+<!-- footer-placeholder -->
 <script>
 const apiBase = "https://api.jikan.moe/v4/anime";
 let currentPage = 1;
