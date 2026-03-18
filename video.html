@@ -2,97 +2,117 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>مشاهدة الحلقة - أنمي توك</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: "Cairo", Arial, sans-serif;
-      background-color: #0b0c10;
-      color: #c5c6c7;
       margin: 0;
-      padding: 0;
-      transition: background-color 0.3s, color 0.3s;
+      font-family: "Cairo", sans-serif;
+      background: #0b0c10;
+      color: #c5c6c7;
+      transition: 0.3s;
     }
 
+    body.light {
+      background: #f4f6f9;
+      color: #222;
+    }
+
+    /* NAV */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #1f2833;
-      color: #fff;
-      padding: 10px 20px;
+      padding: 15px 25px;
+      background: rgba(20,20,30,0.85);
+      backdrop-filter: blur(10px);
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      z-index: 1000;
     }
 
     nav h1 {
       margin: 0;
       color: #66fcf1;
-      font-size: 22px;
+    }
+
+    nav a {
+      color: #ccc;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #fff;
     }
 
     .mode-toggle {
       background: none;
       border: none;
       color: #66fcf1;
-      font-size: 22px;
+      font-size: 20px;
       cursor: pointer;
     }
 
+    /* HEADER */
     header {
-      padding: 90px 20px 20px;
+      padding-top: 90px;
       text-align: center;
-      color: #66fcf1;
+      margin-bottom: 10px;
     }
 
+    header h2 {
+      color: #66fcf1;
+      font-size: 28px;
+    }
+
+    /* VIDEO */
     .video-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      max-width: 1000px;
       margin: 20px auto;
-      max-width: 960px;
-      background-color: #1f2833;
-      border-radius: 10px;
+      background: #1f2833;
+      border-radius: 15px;
       padding: 20px;
-      box-shadow: 0 0 10px #45a29e;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+
+    body.light .video-container {
+      background: #fff;
     }
 
     video {
       width: 100%;
-      border-radius: 10px;
-      background: #000;
-      outline: none;
+      border-radius: 12px;
+      background: black;
     }
 
     .controls {
-      margin-top: 10px;
       text-align: center;
+      margin-top: 15px;
     }
 
     .next-btn {
-      background-color: #45a29e;
-      color: #fff;
+      padding: 12px 25px;
       border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 6px;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #45a29e, #66fcf1);
+      color: #0b0c10;
+      font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: 0.3s;
     }
 
     .next-btn:hover {
-      background-color: #66fcf1;
-      color: #0b0c10;
+      transform: scale(1.05);
     }
 
-    /* الأنميات المقترحة */
+    /* RECOMMENDATIONS */
     .recommendations {
-      margin: 40px auto;
+      margin: 50px auto;
       max-width: 1100px;
       padding: 20px;
     }
@@ -115,11 +135,11 @@
       box-shadow: 0 0 8px #45a29e;
       text-align: center;
       overflow: hidden;
-      transition: transform 0.3s;
+      transition: 0.3s;
     }
 
     .anime-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
     }
 
     .anime-card img {
@@ -129,114 +149,101 @@
     }
 
     .anime-card h3 {
-      font-size: 16px;
+      font-size: 15px;
       padding: 10px;
       color: #66fcf1;
     }
 
-    footer {
-      text-align: center;
-      color: #999;
-      margin: 30px 0 15px;
-      font-size: 14px;
-    }
-
-    /* الوضع الفاتح */
-    body.light {
-      background-color: #fafafa;
-      color: #222;
-    }
-
-    body.light nav {
-      background-color: #fff;
-      color: #222;
-    }
-
-    body.light .video-container,
     body.light .anime-card {
-      background-color: #fff;
+      background: #fff;
       box-shadow: 0 0 10px #aaa;
     }
 
     body.light .anime-card h3 {
       color: #00796b;
     }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      margin: 30px 0 15px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    body.light footer {
+      color: #666;
+    }
   </style>
-
-  <link rel="stylesheet" href="./styles/style.css">
-
-
-
 </head>
+
 <body>
-   <!-- الشريط العلوي -->
+
+<!-- NAV -->
 <nav>
   <h1>🎬 أنمي توك</h1>
   <div>
-    <a href="index.html"> الرئيسية</a>
-    <a href="video.html"> الحلقات</a>
-    <a href="faq.html"> الأسئلة الشائعة</a>
+    <a href="index.html">الرئيسية</a>
+    <a href="video.html">الحلقات</a>
+    <a href="faq.html">الأسئلة الشائعة</a>
     <button id="modeBtn" class="mode-toggle">🌙</button>
   </div>
 </nav>
 
-  <header>
-    <h2 id="anime-title">مشاهدة الحلقة</h2>
-  </header>
+<!-- HEADER -->
+<header>
+  <h2 id="anime-title">مشاهدة الحلقة</h2>
+</header>
 
-  <div class="video-container">
-    <video id="animeVideo" controls>
-      <!-- يمكنك استبدال الفيديو أدناه بفيديو فعلي -->
-      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      متصفحك لا يدعم تشغيل الفيديو.
-    </video>
+<!-- VIDEO -->
+<div class="video-container">
+  <video id="animeVideo" controls>
+    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    متصفحك لا يدعم تشغيل الفيديو.
+  </video>
 
-    <div class="controls">
-      <button class="next-btn" id="nextEpisode">⏭️ الحلقة التالية</button>
-    </div>
+  <div class="controls">
+    <button class="next-btn" id="nextEpisode">⏭️ الحلقة التالية</button>
   </div>
+</div>
 
-  <section class="recommendations">
-    <h2>أنميات مقترَحة وشائعة 🔥</h2>
-    <div id="recommendationsList" class="anime-grid"></div>
-  </section>
+<!-- RECOMMENDATIONS -->
+<section class="recommendations">
+  <h2>أنميات مقترَحة وشائعة 🔥</h2>
+  <div id="recommendationsList" class="anime-grid"></div>
+</section>
 
-  <footer>
-    © 2025 أنمي توك | لعشّاق الأنمي في كل مكان 🌸
-  </footer>
+<footer>
+  © 2025 أنمي توك | لعشّاق الأنمي في كل مكان 🌸
+</footer>
 
-  <script>
-    // زر الوضع الليلي / الفاتح
-    const modeBtn = document.getElementById("modeBtn");
-    modeBtn.addEventListener("click", () => {
-      document.body.classList.toggle("light");
-      modeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
-    });
+<script>
+document.getElementById("modeBtn").onclick = () => {
+  document.body.classList.toggle("light");
+  modeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
+};
 
-    // زر الحلقة التالية
-    document.getElementById("nextEpisode").addEventListener("click", () => {
-      alert("جاري الانتقال إلى الحلقة التالية 🎬");
-      // هنا يمكنك برمجة الانتقال إلى رابط الحلقة التالية فعلياً
-      // مثال: window.location.href = "video2.html";
-    });
+document.getElementById("nextEpisode").onclick = () => {
+  alert("جاري الانتقال إلى الحلقة التالية 🎬");
+};
 
-    // جلب الأنميات المقترحة
-    async function loadRecommendations() {
-      const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=10");
-      const { data } = await res.json();
+async function loadRecommendations() {
+  const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=10");
+  const { data } = await res.json();
 
-      const container = document.getElementById("recommendationsList");
-      container.innerHTML = data.map(anime => `
-        <div class="anime-card">
-          <a href="https://myanimelist.net/anime/${anime.mal_id}" target="_blank">
-            <img src="${anime.images.jpg.large_image_url}" alt="${anime.title}">
-            <h3>${anime.title}</h3>
-          </a>
-        </div>
-      `).join("");
-    }
+  const container = document.getElementById("recommendationsList");
+  container.innerHTML = data.map(anime => `
+    <div class="anime-card">
+      <a href="https://myanimelist.net/anime/${anime.mal_id}" target="_blank">
+        <img src="${anime.images.jpg.large_image_url}" alt="${anime.title}">
+        <h3>${anime.title}</h3>
+      </a>
+    </div>
+  `).join("");
+}
 
-    loadRecommendations();
-  </script>
+loadRecommendations();
+</script>
+
 </body>
 </html>
