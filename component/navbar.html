@@ -1,0 +1,32 @@
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+
+    <h1 class="logo">🎬 أنمي توك</h1>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="video.html">الحلقات</a></li>
+      <li><a href="faq.html">الأسئلة الشائعة</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button id="modeBtn" class="mode-toggle">🌙</button>
+      <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
+
+  </div>
+</nav>
+
+<script>
+// Toggle menu mobile
+document.getElementById("menuBtn").onclick = () => {
+  document.getElementById("navLinks").classList.toggle("show");
+};
+
+// Dark / Light mode
+document.getElementById("modeBtn").onclick = () => {
+  document.body.classList.toggle("light");
+  modeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
+};
+</script>
