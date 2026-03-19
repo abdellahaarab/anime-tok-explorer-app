@@ -4,20 +4,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.getElementById("navLinks");
   const modeBtn = document.getElementById("modeBtn");
 
-  // Toggle menu
-  menuBtn.addEventListener("click", () => {
-    navLinks.classList.toggle("show");
-  });
+  // check elements exist (fix error)
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  }
 
-  // Toggle dark/light
-  modeBtn.addEventListener("click", () => {
-    document.body.classList.toggle("light");
+  if (modeBtn) {
+    modeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light");
 
-    if (document.body.classList.contains("light")) {
-      modeBtn.textContent = "🌙";
-    } else {
-      modeBtn.textContent = "☀️";
-    }
-  });
+      if (document.body.classList.contains("light")) {
+        modeBtn.textContent = "🌙";
+      } else {
+        modeBtn.textContent = "☀️";
+      }
+    });
+  }
 
 });
