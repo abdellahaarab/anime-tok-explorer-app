@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // check elements exist (fix error)
   if (menuBtn && navLinks) {
     menuBtn.addEventListener("click", () => {
+      console.log("TOgel '''''''");
       navLinks.classList.toggle("show");
     });
   }
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (modeBtn) {
     modeBtn.addEventListener("click", () => {
       document.body.classList.toggle("light");
+      console.log("Test darck");
 
       if (document.body.classList.contains("light")) {
         modeBtn.textContent = "🌙";
@@ -25,5 +27,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-console.log("Test");
+
 
