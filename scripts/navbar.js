@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modeBtn = document.getElementById("modeBtn");
 
   // check elements exist (fix error)
-  if (menuBtn && navLinks) {
+  if (menuBtn) {
     menuBtn.addEventListener("click", () => {
       console.log("TOgel '''''''");
       navLinks.classList.toggle("show");
