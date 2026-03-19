@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+console.log("test");
   const menuBtn = document.getElementById("menuBtn");
   const navLinks = document.getElementById("navLinks");
   const modeBtn = document.getElementById("modeBtn");
