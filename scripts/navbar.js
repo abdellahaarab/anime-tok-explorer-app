@@ -1,19 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
-console.log("test");
+  console.log("test");
+
   const menuBtn = document.getElementById("menuBtn");
   const navLinks = document.getElementById("navLinks");
   const modeBtn = document.getElementById("modeBtn");
 
-  // check elements exist (fix error)
-  if (menuBtn) {
-    menuBtn.addEventListener("click", () => {
+  // using onclick directly
+  if (menuBtn && navLinks) {
+    menuBtn.onclick = () => {
       console.log("TOgel '''''''");
       navLinks.classList.toggle("show");
-    });
+    };
   }
 
   if (modeBtn) {
-    modeBtn.addEventListener("click", () => {
+    modeBtn.onclick = () => {
       document.body.classList.toggle("light");
       console.log("Test darck");
 
@@ -22,10 +23,7 @@ console.log("test");
       } else {
         modeBtn.textContent = "☀️";
       }
-    });
+    };
   }
 
 });
-
-
-
