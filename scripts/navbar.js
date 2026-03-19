@@ -1,15 +1,23 @@
-/* Dark mode */
-document.getElementById("modeBtn").onclick = () => {
-  document.body.classList.toggle("dark");
-};
+document.addEventListener("DOMContentLoaded", () => {
 
-  // Toggle menu mobile
-  document.getElementById("menuBtn").onclick = () => {
-    document.getElementById("navLinks").classList.toggle("show");
-  };
-  
-  // Dark / Light mode
-  document.getElementById("modeBtn").onclick = () => {
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+  const modeBtn = document.getElementById("modeBtn");
+
+  // Toggle menu
+  menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+  });
+
+  // Toggle dark/light
+  modeBtn.addEventListener("click", () => {
     document.body.classList.toggle("light");
-    modeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
-  };
+
+    if (document.body.classList.contains("light")) {
+      modeBtn.textContent = "🌙";
+    } else {
+      modeBtn.textContent = "☀️";
+    }
+  });
+
+});
