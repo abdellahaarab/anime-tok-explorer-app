@@ -22,34 +22,7 @@
       color: #222;
     }
 
-    /* NAV */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 25px;
-      background: rgba(20,20,30,0.85);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      z-index: 1000;
-    }
-
-    nav h1 {
-      margin: 0;
-      color: #66fcf1;
-    }
-
-    nav a {
-      color: #ccc;
-      margin: 0 10px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #fff;
-    }
+    
 
     .mode-toggle {
       background: none;
@@ -182,14 +155,6 @@
 
 <!-- navbar-placeholder -->
 <div id="navbar-placeholder"></div>
-
-<script>
-fetch("component/navbar.html")
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById("navbar-placeholder").innerHTML = data;
-  });
-</script>
 <!-- navbar-placeholder -->
 
 <!-- HEADER -->
@@ -228,6 +193,19 @@ fetch("component/footer.html")
 
 <!-- footer-placeholder -->
 
+  
+<!-- navbar-placeholder -->
+
+<script>
+fetch("component/navbar.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("navbar-placeholder").innerHTML = data;
+  });
+</script>
+<!-- navbar-placeholder -->
+
+  
 <script>
 document.getElementById("modeBtn").onclick = () => {
   document.body.classList.toggle("light");
