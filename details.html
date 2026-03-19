@@ -34,21 +34,6 @@
       z-index: 1000;
     }
 
-    nav h1 {
-      margin: 0;
-      color: #66fcf1;
-    }
-
-    nav a {
-      color: #ccc;
-      margin: 0 10px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #fff;
-    }
 
     .mode-toggle {
       background: none;
@@ -298,9 +283,6 @@ async function loadEpisodes() {
     `).join("");
 }
 
-document.getElementById("modeBtn").onclick = () => {
-  document.body.classList.toggle("light");
-};
 
 loadAnimeInfo();
 loadEpisodes();
